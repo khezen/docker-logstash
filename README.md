@@ -70,6 +70,42 @@ Elasticsearch hostname.
 ##### elasticsearch_port | `9200`
 Elasticsearch port.
 
+# Default config
+
+```
+input {
+	tcp {
+		port => 5000
+		codec => "json"
+	}
+	udp {
+		port => 5001
+		codec => "json"
+	}
+}
+
+filter {
+	date {
+		match => [ "timestamp", "dd/MMM/YYYY:HH:mm:ss Z" ]
+	}
+	geoip {
+    	source => "clientip"
+ 	}
+  	useragent {
+    	source => "agent"
+    	target => "useragent"
+  	}
+}
+
+output {
+	elasticsearch {
+		hosts => "${elasticsearch_host}:${elasticsearch_port}"
+		user => "logstash"
+		password => "${logstash_pwd}"
+	}
+}
+```
+
 # User Feedback
 ## Issues
 If you have any problems with or questions about this image, please ask for help through a [GitHub issue](https://github.com/Khezen/docker-logstash/issues).
