@@ -14,6 +14,8 @@ if [ "$1" = 'logstash' ]; then
 	set -- gosu logstash "$@"
 fi
 
+sleep 20 
+
 $@ &
 
 fg

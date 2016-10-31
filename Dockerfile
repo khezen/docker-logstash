@@ -14,5 +14,7 @@ ENV logstash_pwd="changeme" \
 ADD ./src/ /run/
 RUN chmod +x -R /run/
 
+VOLUME /etc/logstash/conf.d
+
 ENTRYPOINT ["/run/entrypoint.sh"]
 CMD ["-f /etc/logstash/conf.d/", "--config.reload.automatic"]
