@@ -4,6 +4,11 @@
 
 set -m
 
+if [ ! -f /etc/logstash/conf.d/logstash.conf ]; then
+	echo "######################################################################"
+    cp -r /.backup/logstash/conf.d /etc/logstash/
+fi
+
 # Add logstash as command if needed
 if [ "${1:0:1}" = '-' ]; then
 	set -- logstash "$@"

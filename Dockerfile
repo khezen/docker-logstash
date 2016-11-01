@@ -4,7 +4,8 @@ MAINTAINER Guillaume Simonneau <simonneaug@gmail.com>
 
 LABEL Description="logstash elasticsearch x-pack"
 
-COPY ./config /etc/logstash/conf.d
+RUN mkdir -p /.backup
+COPY ./config /.backup/logstash/conf.d
 
 ENV logstash_pwd="changeme" \
     elasticsearch_host="elasticsearch" \
