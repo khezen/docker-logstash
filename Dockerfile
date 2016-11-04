@@ -4,6 +4,8 @@ MAINTAINER Guillaume Simonneau <simonneaug@gmail.com>
 
 LABEL Description="logstash elasticsearch x-pack"
 
+RUN apt-get update -y && apt-get install curl -y
+
 RUN mkdir -p /.backup
 COPY ./config /.backup/logstash/conf.d
 
