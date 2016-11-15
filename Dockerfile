@@ -6,9 +6,6 @@ LABEL Description="logstash elasticsearch x-pack"
 
 RUN apt-get update -y && apt-get install curl -y
 
-RUN mkdir -p /.backup
-COPY ./config /.backup/logstash/conf.d
-
 ENV logstash_pwd="changeme" \
     elasticsearch_host="elasticsearch" \
     elasticsearch_port="9200" \
@@ -17,7 +14,9 @@ ENV logstash_pwd="changeme" \
 ADD ./src/ /run/
 RUN chmod +x -R /run/
 
+COPY ./conf.d /.backup/conf.d
 VOLUME /etc/logstash/conf.d
 
+
 ENTRYPOINT ["/run/entrypoint.sh"]
-CMD ["-f /etc/logstash/conf.d/", "--config.reload.automatic"]
+CMD ["logstash", "-f /etc/logstash/conf.d/logstash.conf", "--config.reload.automatic"]
