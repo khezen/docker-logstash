@@ -33,9 +33,9 @@ services:
     elasticsearch:
         image: khezen/elasticsearch
         environment:
-            elastic_pwd: changeme
-            kibana_pwd: brucewayne
-            logstash_pwd: heizenberg
+            ELASTIC_PWD: changeme
+            KIBANA_PWD: brucewayne
+            LOGSTASH_PWD: heizenberg
         ports:
              - "9200:9200"
              - "9300:9300"
@@ -47,7 +47,7 @@ services:
             - elasticsearch
         image: khezen/kibana
         environment:
-            kibana_pwd: brucewayne
+            KIBANA_PWD: brucewayne
         ports:
              - "5601:5601"
         network_mode: bridge
@@ -58,7 +58,7 @@ services:
             - elasticsearch
         image: khezen/logstash:5
         environment:
-            logstash_pwd: heizenberg
+            LOGSTASH_PWD: heizenberg
         ports:
              - "5000:5000"
              - "5001:5001"
@@ -68,16 +68,16 @@ services:
 ```
 # Environment Variables
 
-##### heap_size | `1g`
+##### HEAP_SIZE | `1g`
 Defines the maximum memory allocated to logstash.
 
-##### logstash_pwd | `changeme`
+##### LOGSTASH_PWD | `changeme`
 password for elasticsearch built-in user *logstash*.
 
-##### elasticsearch_host | `elasticseach`
+##### ELASTICSEARCH_HOST | `elasticseach`
 Elasticsearch hostname.
 
-##### elasticsearch_port | `9200`
+##### ELASTICSEARCH_PORT | `9200`
 Elasticsearch port.
 
 # Default config
@@ -109,9 +109,9 @@ filter {
 
 output {
 	elasticsearch {
-		hosts => "${elasticsearch_host}:${elasticsearch_port}"
+		hosts => "${ELASTICSEARCH_HOST}:${ELASTICSEARCH_PORT}"
 		user => "logstash"
-		password => "${logstash_pwd}"
+		password => "${LOGSTASH_PWD}"
 	}
 }
 ```
