@@ -14,7 +14,7 @@ ENV LOGSTASH_PWD="changeme" \
 ADD ./src/ /run/
 RUN chmod +x -R /run/
 
-COPY ./conf.d /.backup/conf.d
+COPY ./conf.d /.backup/logstash/conf.d
 VOLUME /etc/logstash/conf.d
 
 

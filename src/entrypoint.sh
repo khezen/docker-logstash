@@ -2,7 +2,7 @@
 
 set -m
 
-/run/miscellaneous/perf.sh
+export LS_JAVA_OPTS="-Xms$HEAP_SIZE -Xmx$HEAP_SIZE"
 /run/miscellaneous/restore_config.sh
 /run/miscellaneous/wait_for_elasticsearch.sh
 
