@@ -15,6 +15,8 @@ ADD ./src/ /run/
 RUN chmod +x -R /run/
 
 COPY ./conf.d /.backup/logstash/conf.d
+RUN rm -f /etc/logstash/conf.d/logstash.conf
+
 VOLUME /etc/logstash/conf.d
 
 
