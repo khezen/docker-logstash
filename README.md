@@ -147,6 +147,16 @@ output {
 }
 ```
 
+# Configure Logstash
+
+Configuration file is located in `/etc/logstash/logstash.conf` if you follow the same volume mapping as in docker-compose examples above.
+
+You can find default config [there](https://github.com/Khezen/docker-logstash/blob/master/config/logstash.conf).
+
+*NOTE*: It is possible to use [environment variables in logstash.conf](https://www.elastic.co/guide/en/logstash/current/environment-variables.html).
+
+You can find help with logstash configuration [there](https://www.elastic.co/guide/en/logstash/current/configuration.html).
+
 # User Feedback
 ## Issues
 If you have any problems with or questions about this image, please ask for help through a [GitHub issue](https://github.com/Khezen/docker-logstash/issues).
