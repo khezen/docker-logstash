@@ -105,7 +105,7 @@ Defines the maximum memory allocated to logstash.
 ##### LOGSTASH_PWD | `changeme`
 password for elasticsearch built-in user *logstash*.
 
-##### ELASTICSEARCH_HOST | `elasticseach`
+##### ELASTICSEARCH_HOST | `elasticsearch`
 Elasticsearch hostname.
 
 ##### ELASTICSEARCH_PORT | `9200`
