@@ -1,8 +1,8 @@
-FROM logstash:5.0
+FROM logstash:2.4
 
 MAINTAINER Guillaume Simonneau <simonneaug@gmail.com>
 
-LABEL Description="logstash elasticsearch x-pack"
+LABEL Description="logstash elasticsearch"
 
 RUN apt-get update -y && apt-get install curl -y
 
@@ -19,6 +19,5 @@ RUN rm -f /etc/logstash/conf.d/logstash.conf
 
 VOLUME /etc/logstash/conf.d
 
-
 ENTRYPOINT ["/run/entrypoint.sh"]
-CMD ["logstash", "-f /etc/logstash/conf.d/logstash.conf", "--config.reload.automatic"]
+CMD ["logstash", "-f /etc/logstash/conf.d/logstash.conf"]
