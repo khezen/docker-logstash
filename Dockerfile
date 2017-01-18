@@ -2,7 +2,7 @@ FROM logstash:5.1
 
 MAINTAINER Guillaume Simonneau <simonneaug@gmail.com>
 
-LABEL Description="logstash elasticsearch http_poller"
+LABEL Description="logstash elasticsearch http_poller exec"
 
 RUN apt-get update -y && apt-get install curl -y
 RUN /usr/share/logstash/bin/logstash-plugin install logstash-input-http_poller
