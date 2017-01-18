@@ -7,6 +7,7 @@ LABEL Description="logstash elasticsearch http_poller exec"
 RUN apt-get update -y && apt-get install curl -y
 RUN /opt/logstash/bin/logstash-plugin install logstash-input-http_poller
 RUN /opt/logstash/bin/logstash-plugin install logstash-input-exec
+RUN /opt/logstash/bin/logstash-plugin install logstash-filter-json_encode
 
 ENV LOGSTASH_PWD="changeme" \
     ELASTICSEARCH_HOST="elasticsearch" \
