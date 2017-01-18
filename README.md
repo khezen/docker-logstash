@@ -2,7 +2,8 @@
 # Supported tags and respective `Dockerfile` links
 
 * `2.4.1`, `2.4`, `2` [(2.4/Dockerfile)](https://github.com/Khezen/docker-logstash/blob/2.4/Dockerfile)
-* `5.1.1`, `5.1`, `5`, `latest` [(5.0/Dockerfile)](https://github.com/Khezen/docker-logstash/blob/5.0/Dockerfile)
+* `5.1.2`, `5.1`, `5`, `latest` [(5.0/Dockerfile)](https://github.com/Khezen/docker-logstash/blob/5.1/Dockerfile)
+
 
 # What is logstash?
 Logstash is an open source, server-side data processing pipeline that ingests data from a multitude of sources simultaneously, transforms it, and then sends it to your favorite “stash.” (Elasticsearch for example.)
