@@ -6,6 +6,7 @@ LABEL Description="logstash elasticsearch http_poller"
 
 RUN apt-get update -y && apt-get install curl -y
 RUN /opt/logstash/bin/logstash-plugin install logstash-input-http_poller
+RUN /opt/logstash/bin/logstash-plugin install logstash-input-exec
 
 ENV LOGSTASH_PWD="changeme" \
     ELASTICSEARCH_HOST="elasticsearch" \
