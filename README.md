@@ -28,31 +28,12 @@ sysctl -w vm.max_map_count=262144
 You can set it permanently by modifying `vm.max_map_count` setting in your `/etc/sysctl.conf`.
 
 ### docker-compose.yml
-```
-version: '2'
-services:
-    logstash:
-        image: khezen/logstash:5
-        environment:
-            LOGSTASH_PWD: heizenberg
-            ELASTICSEARCH_HOST: elasticsearch
-            ELASTICSEARCH_PORT: 9200
-        volumes:
-            - /etc/logstash:/etc/logstash/conf.d
-        ports:
-             - "5000:5000"
-             - "5001:5001"
-        network_mode: bridge
-        restart: always
-```
-
-or
 
 ```
-version: '2'
+version: '3'
 services:
     elasticsearch:
-        image: khezen/elasticsearch
+        image: khezen/elasticsearch:2
         environment:
             ELASTIC_PWD: changeme
             KIBANA_PWD: brucewayne
@@ -64,38 +45,39 @@ services:
              - "9200:9200"
              - "9300:9300"
         network_mode: bridge
-        restart: always
+        restart: unless-stopped
     
     kibana:
         links:
-            - elasticsearch
-        image: khezen/kibana
+            - elasticsearch:elasticsearch-0
+        image: khezen/kibana:4
         environment:
             KIBANA_PWD: brucewayne
-            ELASTICSEARCH_HOST: elasticsearch
+            ELASTICSEARCH_HOST: elasticsearch-0
             ELASTICSEARCH_PORT: 9200
         volumes:
-            - /etc/kibana:/etc/kibana
+            - /etc/kibana:/opt/kibana/config
         ports:
              - "5601:5601"
         network_mode: bridge
-        restart: always
+        restart: unless-stopped
 
     logstash:
         links:
-            - elasticsearch
-        image: khezen/logstash:5
+            - elasticsearch:elasticsearch-0
+        image: khezen/logstash:2
         environment:
             LOGSTASH_PWD: heizenberg
-            ELASTICSEARCH_HOST: elasticsearch
+            ELASTICSEARCH_HOST: elasticsearch-0
             ELASTICSEARCH_PORT: 9200
         volumes:
             - /etc/logstash:/etc/logstash/conf.d
+            - /etc/elasticsearch/searchguard/ssl:/etc/elasticsearch/searchguard/ssl
         ports:
              - "5000:5000"
              - "5001:5001"
         network_mode: bridge
-        restart: always
+        restart: unless-stopped
 
 ```
 # Environment Variables
@@ -111,6 +93,9 @@ Elasticsearch hostname.
 
 ##### ELASTICSEARCH_PORT | `9200`
 Elasticsearch port.
+
+##### TS_PWD | `changeme`
+Truststore password
 
 # Default config
 
@@ -142,8 +127,12 @@ filter {
 output {
 	elasticsearch {
 		hosts => "${ELASTICSEARCH_HOST}:${ELASTICSEARCH_PORT}"
-		user => "logstash"
-		password => "${LOGSTASH_PWD}"
+    user => "logstash"
+    password => "${LOGSTASH_USER}"
+		ssl => true
+    ssl_certificate_verification => true
+		truststore => "/etc/elasticsearch/searchguard/ssl/truststore.jks"
+    truststore_password => "${TS_PWD}"
 	}
 }
 ```

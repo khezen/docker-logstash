@@ -12,7 +12,8 @@ RUN /opt/logstash/bin/logstash-plugin install logstash-filter-json_encode
 ENV LOGSTASH_PWD="changeme" \
     ELASTICSEARCH_HOST="elasticsearch" \
     ELASTICSEARCH_PORT="9200" \
-    HEAP_SIZE="1g"
+    HEAP_SIZE="1g" \
+    TS_PWD="changeme"
 
 ADD ./src/ /run/
 RUN chmod +x -R /run/
