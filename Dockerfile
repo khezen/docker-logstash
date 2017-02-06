@@ -1,4 +1,4 @@
-FROM logstash:5.1
+FROM logstash:5.2
 
 MAINTAINER Guillaume Simonneau <simonneaug@gmail.com>
 
