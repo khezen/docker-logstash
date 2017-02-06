@@ -2,7 +2,8 @@
 # Supported tags and respective `Dockerfile` links
 
 * `2.4.1`, `2.4`, `2` [(2.4/Dockerfile)](https://github.com/Khezen/docker-logstash/blob/2.4/Dockerfile)
-* `5.1.2`, `5.1`, `5`, `latest` [(5.0/Dockerfile)](https://github.com/Khezen/docker-logstash/blob/5.1/Dockerfile)
+* `5.1.2`, `5.1` [(5.1/Dockerfile)](https://github.com/Khezen/docker-logstash/blob/5.1/Dockerfile)
+* `5.2.0`, `5.2`, `5`, `latest` [(5.2/Dockerfile)](https://github.com/Khezen/docker-logstash/blob/5.2/Dockerfile)
 
 
 # What is logstash?
@@ -60,13 +61,13 @@ services:
             LOGSTASH_PWD: heizenberg
         volumes:
             - /data/elasticsearch:/usr/share/elasticsearch/data
-            - /etc/elasticsearch:/usr/share/elasticsearch/config 
+            - /etc/elasticsearch:/usr/share/elasticsearch/config
         ports:
              - "9200:9200"
              - "9300:9300"
         network_mode: bridge
         restart: always
-    
+
     kibana:
         links:
             - elasticsearch
